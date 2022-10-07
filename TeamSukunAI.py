@@ -25,17 +25,17 @@ async def is_admins(chat_id: int):
     ]
 
 
-@bot.on_message(filters.command("Hii"))
+@bot.on_message(filters.command("hii"))
 async def start(client, message):
-        await message.reply_text("ᴇʟʟᴏ ᴍᴀɪɴ sᴜᴋᴜɴ ʜᴏ ᴀᴀᴘ ᴋᴏɴ ʜᴏ ᴀᴜʟ ᴍsɢ ᴋʏᴜ ᴋᴀʟ ʟᴀʜᴇ ʜᴏ")
+        await message.reply_text("ʜʟᴏ ᴍᴇɪɴ ꜱᴜᴋᴜɴ ʜᴜ ᴀᴀᴘ ᴋᴀᴜɴ ʜᴏ ᴀᴜʟ ᴍꜱɢ ᴋʏᴜɴ ᴋɪʏᴀ")
 
 
 @bot.on_message(
     filters.command("chatbot off", prefixes=["/", ".", "?", "-"])
     & ~filters.private)
 async def chatbotofd(client, message):
-    TeamSukunAIdb = MongoClient(MONGO_URL)
-    TeamSukunAI = TeamSukunAIdb["TeamSukunAIDb"]["TeamSukunAI"] 
+    teamsukunai = MongoClient(MONGO_URL)    
+    teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"]     
     if message.from_user:
         user = message.from_user.id
         chat_id = message.chat.id
@@ -43,22 +43,22 @@ async def chatbotofd(client, message):
            await is_admins(chat_id)
         ):
            return await message.reply_text(
-                "ᴜʜ ᴀᴅᴍɪɴ ɴᴏɪ ʜᴏᴛɪ"
+                "You are not admin"
             )
-    is_TeamSukunAI = TeamSukunAI.find_one({"chat_id": message.chat.id})
-    if not is_TeamSukunAI:
-        TeamSukunAI.insert_one({"chat_id": message.chat.id})
-        await message.reply_text(f"ᴏᴏʏᴇ ᴄʜᴀᴛʙᴏᴛ ᴅɪsᴀʙʟᴇᴅ ʜᴏ ɢʏᴀ ʏᴀᴀʟ!\n @TeamSukun")
-    if is_TeamSukunAI:
-        await message.reply_text(f"ᴄʜᴀᴛʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ ʜ ʏᴀᴀʟ")
-
+    is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})
+    if not is_teamsukunai:
+        teamsukunai.insert_one({"chat_id": message.chat.id})
+        await message.reply_text(f"Chatbot Disabled!")
+    if is_teamsukunai:
+        await message.reply_text(f"ChatBot Is Already Disabled")
+    
 
 @bot.on_message(
     filters.command("chatbot on", prefixes=["/", ".", "?", "-"])
     & ~filters.private)
 async def chatboton(client, message):
-    TeamSukunAIdb = MongoClient(MONGO_URL)  
-    TeamSukunAI = TeamSukunAIdb["TeamSukunAIDb"]["TeamSukunAI"] 
+    teamsukunaidb = MongoClient(MONGO_URL)    
+    teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"]     
     if message.from_user:
         user = message.from_user.id
         chat_id = message.chat.id
@@ -66,15 +66,15 @@ async def chatboton(client, message):
             await is_admins(chat_id)
         ):
             return await message.reply_text(
-                "ᴜʜ ᴀᴅᴍɪɴ ɴᴏɪ ʜᴏɪ."
+                "You are not admin"
             )
-    is_TeamSukunAI = TeamSukunAI.find_one({"chat_id": message.chat.id})
-    if not is_TeamSukunAI:
-        await message.reply_text(f"ᴏᴏʏᴇ ᴄʜᴀᴛʙᴏᴛ ᴇɴᴀʙʟᴇᴅ ʜᴏ ɢʏᴀ ʏᴀᴀʟ!\n @TeamSukun")
-    if is_TeamSukunAI:
-        TeamSukunAI.delete_one({"chat_id": message.chat.id})
-        await message.reply_text(f"ᴄʜᴀᴛʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ ʜ ʏᴀᴀʟ")
-
+    is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})
+    if not is_teamsukunai:           
+        await message.reply_text(f"Chatbot Is Already Enabled")
+    if is_teamsukunai:
+        teamsukunai.delete_one({"chat_id": message.chat.id})
+        await message.reply_text(f"ChatBot Is Enable!")
+    
 
 @bot.on_message(
     filters.command("chatbot", prefixes=["/", ".", "?", "-"])
@@ -83,221 +83,222 @@ async def chatbot(client, message):
     await message.reply_text(f"**Usage:**\n/chatbot [on|off] only group")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@bot.on_message(
+ (
+        filters.text
+        | filters.sticker
+    )
+    & ~filters.private
+    & ~filters.bot,
+)
+async def teamsukunaiai(client: Client, message: Message):
+
+   chatdb = MongoClient(MONGO_URL)
+   chatai = chatdb["Word"]["WordDb"]   
+
+   if not message.reply_to_message:
+       teamsukunaidb = MongoClient(MONGO_URL)
+       teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"] 
+       is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})
+       if not is_teamsukunai:
+           await bot.send_chat_action(message.chat.id, "typing")
+           K = []  
+           is_chat = chatai.find({"word": message.text})  
+           k = chatai.find_one({"word": message.text})      
+           if k:               
+               for x in is_chat:
+                   K.append(x['text'])          
+               hey = random.choice(K)
+               is_text = chatai.find_one({"text": hey})
+               Yo = is_text['check']
+               if Yo == "sticker":
+                   await message.reply_sticker(f"{hey}")
+               if not Yo == "sticker":
+                   await message.reply_text(f"{hey}")
+   
+   if message.reply_to_message:  
+       teamsukunaidb = MongoClient(MONGO_URL)
+       teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"] 
+       is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})   
+       getme = await bot.get_me()
+       bot_id = getme.id                             
+       if message.reply_to_message.from_user.id == bot_id: 
+           if not is_teamsukunai:                   
+               await bot.send_chat_action(message.chat.id, "typing")
+               K = []  
+               is_chat = chatai.find({"word": message.text})
+               k = chatai.find_one({"word": message.text})      
+               if k:       
+                   for x in is_chat:
+                       K.append(x['text'])
+                   hey = random.choice(K)
+                   is_text = chatai.find_one({"text": hey})
+                   Yo = is_text['check']
+                   if Yo == "sticker":
+                       await message.reply_sticker(f"{hey}")
+                   if not Yo == "sticker":
+                       await message.reply_text(f"{hey}")
+       if not message.reply_to_message.from_user.id == bot_id:          
+           if message.sticker:
+               is_chat = chatai.find_one({"word": message.reply_to_message.text, "id": message.sticker.file_unique_id})
+               if not is_chat:
+                   chatai.insert_one({"word": message.reply_to_message.text, "text": message.sticker.file_id, "check": "sticker", "id": message.sticker.file_unique_id})
+           if message.text:                 
+               is_chat = chatai.find_one({"word": message.reply_to_message.text, "text": message.text})                 
+               if not is_chat:
+                   chatai.insert_one({"word": message.reply_to_message.text, "text": message.text, "check": "none"})    
+               
+
+@bot.on_message(
+ (
+        filters.sticker
+        | filters.text
+    )
+    & ~filters.private
+    & ~filters.bot,
+)
+async def teamsukunaistickerai(client: Client, message: Message):
+
+   chatdb = MongoClient(MONGO_URL)
+   chatai = chatdb["Word"]["WordDb"]   
+
+   if not message.reply_to_message:
+       teamsukunaidb = MongoClient(MONGO_URL)
+       teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"] 
+       is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})
+       if not is_teamsukunai:
+           await bot.send_chat_action(message.chat.id, "typing")
+           K = []  
+           is_chat = chatai.find({"word": message.sticker.file_unique_id})      
+           k = chatai.find_one({"word": message.text})      
+           if k:           
+               for x in is_chat:
+                   K.append(x['text'])
+               hey = random.choice(K)
+               is_text = chatai.find_one({"text": hey})
+               Yo = is_text['check']
+               if Yo == "text":
+                   await message.reply_text(f"{hey}")
+               if not Yo == "text":
+                   await message.reply_sticker(f"{hey}")
+   
+   if message.reply_to_message:
+       teamsukunaidb = MongoClient(MONGO_URL)
+       teamsukunai = teamsukunaidb["TeamSukunAIDb"]["TeamSukunAI"] 
+       is_teamsukunai = teamsukunai.find_one({"chat_id": message.chat.id})
+       getme = await bot.get_me()
+       bot_id = getme.id
+       if message.reply_to_message.from_user.id == bot_id: 
+           if not is_teamsukunai:                    
+               await bot.send_chat_action(message.chat.id, "typing")
+               K = []  
+               is_chat = chatai.find({"word": message.text})
+               k = chatai.find_one({"word": message.text})      
+               if k:           
+                   for x in is_chat:
+                       K.append(x['text'])
+                   hey = random.choice(K)
+                   is_text = chatai.find_one({"text": hey})
+                   Yo = is_text['check']
+                   if Yo == "text":
+                       await message.reply_text(f"{hey}")
+                   if not Yo == "text":
+                       await message.reply_sticker(f"{hey}")
+       if not message.reply_to_message.from_user.id == bot_id:          
+           if message.text:
+               is_chat = chatai.find_one({"word": message.reply_to_message.sticker.file_unique_id, "text": message.text})
+               if not is_chat:
+                   toggle.insert_one({"word": message.reply_to_message.sticker.file_unique_id, "text": message.text, "check": "text"})
+           if message.sticker:                 
+               is_chat = chatai.find_one({"word": message.reply_to_message.sticker.file_unique_id, "text": message.sticker.file_id})                 
+               if not is_chat:
+                   chatai.insert_one({"word": message.reply_to_message.sticker.file_unique_id, "text": message.sticker.file_id, "check": "none"})    
+               
+
+
+@bot.on_message(
+    (
+        filters.text
+        | filters.sticker
+    )
+    & filters.private
+    & ~filters.bot,
+)
+async def teamsukunaiprivate(client: Client, message: Message):
+
+   chatdb = MongoClient(MONGO_URL)
+   chatai = chatdb["Word"]["WordDb"]
+   if not message.reply_to_message: 
+       await bot.send_chat_action(message.chat.id, "typing")
+       K = []  
+       is_chat = chatai.find({"word": message.text})                 
+       for x in is_chat:
+           K.append(x['text'])
+       hey = random.choice(K)
+       is_text = chatai.find_one({"text": hey})
+       Yo = is_text['check']
+       if Yo == "sticker":
+           await message.reply_sticker(f"{hey}")
+       if not Yo == "sticker":
+           await message.reply_text(f"{hey}")
+   if message.reply_to_message:            
+       getme = await bot.get_me()
+       bot_id = getme.id       
+       if message.reply_to_message.from_user.id == bot_id:                    
+           await bot.send_chat_action(message.chat.id, "typing")
+           K = []  
+           is_chat = chatai.find({"word": message.text})                 
+           for x in is_chat:
+               K.append(x['text'])
+           hey = random.choice(K)
+           is_text = chatai.find_one({"text": hey})
+           Yo = is_text['check']
+           if Yo == "sticker":
+               await message.reply_sticker(f"{hey}")
+           if not Yo == "sticker":
+               await message.reply_text(f"{hey}")
+       
+
+@bot.on_message(
+ (
+        filters.sticker
+        | filters.text
+    )
+    & filters.private
+    & ~filters.bot,
+)
+async def teamsukunaiprivatesticker(client: Client, message: Message):
+
+   chatdb = MongoClient(MONGO_URL)
+   chatai = chatdb["Word"]["WordDb"] 
+   if not message.reply_to_message:
+       await bot.send_chat_action(message.chat.id, "typing")
+       K = []  
+       is_chat = chatai.find({"word": message.sticker.file_unique_id})                 
+       for x in is_chat:
+           K.append(x['text'])
+       hey = random.choice(K)
+       is_text = chatai.find_one({"text": hey})
+       Yo = is_text['check']
+       if Yo == "text":
+           await message.reply_text(f"{hey}")
+       if not Yo == "text":
+           await message.reply_sticker(f"{hey}")
+   if message.reply_to_message:            
+       getme = await bot.get_me()
+       bot_id = getme.id       
+       if message.reply_to_message.from_user.id == bot_id:                    
+           await bot.send_chat_action(message.chat.id, "typing")
+           K = []  
+           is_chat = chatai.find({"word": message.sticker.file_unique_id})                 
+           for x in is_chat:
+               K.append(x['text'])
+           hey = random.choice(K)
+           is_text = chatai.find_one({"text": hey})
+           Yo = is_text['check']
+           if Yo == "text":
+               await message.reply_text(f"{hey}")
+           if not Yo == "text":
+               await message.reply_sticker(f"{hey}")
+       
+bot.run()
