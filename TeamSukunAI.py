@@ -33,53 +33,54 @@ async def start(client, message):
 @bot.on_message(
     filters.command("chatbot off", prefixes=["/", ".", "?", "-"])
     & ~filters.private)
+async def chatbotofd(client, message):
+    TeamSukunAIdb = MongoClient(MONGO_URL)
+    TeamSukunAI = TeamSukunAIdb["TeamSukunAIDb"]["TeamSukunAI"] 
+    if message.from_user:
+        user = message.from_user.id
+        chat_id = message.chat.id
+        if user not in (
+           await is_admins(chat_id)
+        ):
+           return await message.reply_text(
+                "ᴜʜ ᴀᴅᴍɪɴ ɴᴏɪ ʜᴏᴛɪ"
+            )
+    is_TeamSukunAI = TeamSukunAI.find_one({"chat_id": message.chat.id})
+    if not is_TeamSukunAI:
+        TeamSukunAI.insert_one({"chat_id": message.chat.id})
+        await message.reply_text(f"ᴏᴏʏᴇ ᴄʜᴀᴛʙᴏᴛ ᴅɪsᴀʙʟᴇᴅ ʜᴏ ɢʏᴀ ʏᴀᴀʟ!\n @TeamSukun")
+    if is_TeamSukunAI:
+        await message.reply_text(f"ᴄʜᴀᴛʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ ʜ ʏᴀᴀʟ")
 
 
+@bot.on_message(
+    filters.command("chatbot on", prefixes=["/", ".", "?", "-"])
+    & ~filters.private)
+async def chatboton(client, message):
+    TeamSukunAIdb = MongoClient(MONGO_URL)  
+    TeamSukunAI = TeamSukunAIdb["TeamSukunAIDb"]["TeamSukunAI"] 
+    if message.from_user:
+        user = message.from_user.id
+        chat_id = message.chat.id
+        if user not in (
+            await is_admins(chat_id)
+        ):
+            return await message.reply_text(
+                "ᴜʜ ᴀᴅᴍɪɴ ɴᴏɪ ʜᴏɪ."
+            )
+    is_TeamSukunAI = TeamSukunAI.find_one({"chat_id": message.chat.id})
+    if not is_TeamSukunAI:
+        await message.reply_text(f"ᴏᴏʏᴇ ᴄʜᴀᴛʙᴏᴛ ᴇɴᴀʙʟᴇᴅ ʜᴏ ɢʏᴀ ʏᴀᴀʟ!\n @TeamSukun")
+    if is_TeamSukunAI:
+        TeamSukunAI.delete_one({"chat_id": message.chat.id})
+        await message.reply_text(f"ᴄʜᴀᴛʙᴏᴛ ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ ʜ ʏᴀᴀʟ")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@bot.on_message(
+    filters.command("chatbot", prefixes=["/", ".", "?", "-"])
+    & ~filters.private)
+async def chatbot(client, message):
+    await message.reply_text(f"**Usage:**\n/chatbot [on|off] only group")
 
 
 
