@@ -8,7 +8,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?color=F77247&width=420&lines=ᴄʟɪᴄᴋ+ᴏɴ+ʙᴇʟᴏᴡ+ʟᴏɢᴏ+ᴛᴏ+ᴅᴇᴘʟᴏʏ;ᴘᴏᴡᴇʀᴇᴅ+ʙʏ+ᴛᴇᴀᴍ-sᴜᴋᴜɴ%E2%9D%A4%EF%B8%8F">
 </p>
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/TeamSukun/BOTDEPLOY"><img align="center" alt="Heroku" width="92px" src="https://www.nicepng.com/png/full/223-2233246_heroku-logo-salesforce-heroku.png"></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/TeamSukun/SukunId-AI"><img align="center" alt="Heroku" width="92px" src="https://www.nicepng.com/png/full/223-2233246_heroku-logo-salesforce-heroku.png"></p>
 
 ## sᴜᴋᴜɴ sᴜᴘᴘᴏʀᴛs 
 
